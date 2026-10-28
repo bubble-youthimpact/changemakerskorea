@@ -562,15 +562,15 @@ select.inp{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns
 
       <div class="media-row three">
         <div class="media video baked" role="button" tabindex="0" aria-label="Play video: Got a world-changing idea but no plan?" data-label="Got a world-changing idea but no plan?" data-yt="DuVvHufA9io">
-          <img src="https://i.ytimg.com/vi/DuVvHufA9io/oar2.jpg" data-local="images/video-1.webp" alt="" loading="lazy">
+          <img src="images/video-1.webp" alt="">
           <span class="vt">Got a world-changing idea but no plan?</span><span class="play"></span>
         </div>
         <div class="media video baked" role="button" tabindex="0" aria-label="Play video: 17 Goals. One Planet. Zero Time to Waste." data-label="17 Goals. One Planet. Zero Time to Waste." data-yt="a7SxKLjLFN4">
-          <img src="https://i.ytimg.com/vi/a7SxKLjLFN4/oar2.jpg" data-local="images/video-2.webp" alt="" loading="lazy">
+          <img src="images/video-2.webp" alt="">
           <span class="vt">17 Goals. One Planet. Zero Time to Waste.</span><span class="play"></span>
         </div>
         <div class="media video baked" role="button" tabindex="0" aria-label="Play video: Meet the Judges | Changemakers Korea" data-label="Meet the Judges | Changemakers Korea" data-yt="y0j8EIJ8Ajg">
-          <img src="https://i.ytimg.com/vi/y0j8EIJ8Ajg/oar2.jpg" data-local="images/video-3.webp" alt="" loading="lazy">
+          <img src="images/video-3.webp" alt="">
           <span class="vt">Meet the Judges | Changemakers Korea</span><span class="play"></span>
         </div>
       </div>
@@ -1058,16 +1058,9 @@ select.inp{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns
   addEventListener('resize',spyNow);
   document.getElementById('toTop').onclick=()=>{ if(location.hash&&location.hash!=='#home'){history.replaceState(null,'',location.pathname+location.search)} window.scrollTo({top:0,behavior:reduce?'auto':'smooth'}); };
 
-  /* ---------- videos: YouTube's full-size cover, then play in place on click ---------- */
+  /* ---------- videos: play in place on click ---------- */
   const canEmbed=!/claude\.ai|claudeusercontent|anthropic/.test(location.hostname)&&location.protocol!=='file:';
   document.querySelectorAll('.video[data-yt]').forEach(card=>{
-    const img=card.querySelector('img');
-    const useLocal=()=>{ if(img.dataset.used) return; img.dataset.used=1; card.classList.add('baked'); img.src=img.dataset.local; };
-    // YouTube's own cover is sharper; if it can't load (or is a tiny placeholder) fall back to the saved cover
-    img.addEventListener('load',()=>{ if(!img.dataset.used){ if(img.naturalWidth<300) useLocal(); else card.classList.remove('baked'); } });
-    img.addEventListener('error',useLocal);
-    if(!canEmbed) useLocal();
-    else if(img.complete){ if(!img.naturalWidth||img.naturalWidth<300) useLocal(); else card.classList.remove('baked'); }
     const play=()=>{
       if(card.querySelector('iframe')) return;
       const f=document.createElement('iframe');

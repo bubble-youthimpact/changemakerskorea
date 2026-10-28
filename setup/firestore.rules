@@ -1,0 +1,38 @@
+rules_version = '2';
+
+// Changemakers Korea — Apply form
+// Drafts are stored under a SHA-256 hash of (email + date of birth), so they can be
+// opened only by someone who knows both. Nobody can list or browse them.
+// Applications can be created by the form but never read from the website;
+// you read them in the Firebase console, which ignores these rules.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /drafts/{draftId} {
+      function validId() { return draftId.matches('^[0-9a-f]{64}$'); }
+
+      allow get: if validId();
+      allow list, delete: if false;
+
+      allow create: if validId()
+        && request.resource.data.keys().hasOnly(['v', 'status', 'data', 'updatedAt'])
+        && request.resource.data.status == 'draft';
+
+      // Drafts can be edited until the application is submitted, then they are locked.
+      allow update: if validId()
+        && resource.data.status == 'draft'
+        && request.resource.data.status in ['draft', 'submitted'];
+    }
+
+    match /applications/{ref} {
+      allow create: if ref.matches('^CMK-[A-Z0-9]{6}$')
+        && request.resource.data.keys().hasAll(['ref', 'members', 'project', 'lead', 'consent', 'submittedAt'])
+        && request.resource.data.ref == ref
+        && request.resource.data.consent == true
+        && request.resource.data.members is list
+        && request.resource.data.members.size() >= 1
+        && request.resource.data.members.size() <= 7;
+      allow read, update, delete: if false;
+    }
+  }
+}

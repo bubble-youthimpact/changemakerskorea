@@ -129,6 +129,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .video .play{position:absolute;z-index:2;left:50%;top:50%;width:62px;height:42px;margin:-21px 0 0 -31px;border-radius:12px;background:rgba(255,255,255,.92);display:grid;place-items:center}
 .video .play::before{content:"";border-left:16px solid var(--ink);border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3}
+.video:has(img) .vt,.video:has(img) .play{display:none}
+.video img{object-fit:cover;object-position:top}
 .poster{border-radius:10px;aspect-ratio:192/270;width:100%;background:#262636}
 
 /* topic */
@@ -559,15 +561,15 @@ select.inp{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns
 
       <div class="media-row three">
         <a class="media video" data-label="Got a world-changing idea but no plan?" data-yt="DuVvHufA9io" href="https://www.youtube.com/shorts/DuVvHufA9io" target="_blank" rel="noopener">
-          <img src="https://i.ytimg.com/vi/DuVvHufA9io/oar2.jpg" alt="" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='https://i.ytimg.com/vi/DuVvHufA9io/hqdefault.jpg'}else this.remove()">
+          <img src="images/video-1.webp" alt="" loading="lazy">
           <span class="vt">Got a world-changing idea but no plan?</span><span class="play"></span>
         </a>
         <a class="media video" data-label="17 Goals. One Planet. Zero Time to Waste." data-yt="a7SxKLjLFN4" href="https://www.youtube.com/shorts/a7SxKLjLFN4" target="_blank" rel="noopener">
-          <img src="https://i.ytimg.com/vi/a7SxKLjLFN4/oar2.jpg" alt="" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='https://i.ytimg.com/vi/a7SxKLjLFN4/hqdefault.jpg'}else this.remove()">
+          <img src="images/video-2.webp" alt="" loading="lazy">
           <span class="vt">17 Goals. One Planet. Zero Time to Waste.</span><span class="play"></span>
         </a>
         <a class="media video" data-label="Meet the Judges | Changemakers Korea" data-yt="y0j8EIJ8Ajg" href="https://www.youtube.com/shorts/y0j8EIJ8Ajg" target="_blank" rel="noopener">
-          <img src="https://i.ytimg.com/vi/y0j8EIJ8Ajg/oar2.jpg" alt="" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='https://i.ytimg.com/vi/y0j8EIJ8Ajg/hqdefault.jpg'}else this.remove()">
+          <img src="images/video-3.webp" alt="" loading="lazy">
           <span class="vt">Meet the Judges | Changemakers Korea</span><span class="play"></span>
         </a>
       </div>
